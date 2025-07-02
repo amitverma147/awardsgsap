@@ -7,15 +7,16 @@ import gsap from "gsap";
 
 const NutritionSection = () => {
   const isMobile = useMediaQuery({
-    query: "(max-width:768px)",
+    query: "(max-width: 768px)",
   });
-  const [list, setList] = useState(nutrientLists);
+
+  const [lists, setLists] = useState(nutrientLists);
 
   useEffect(() => {
     if (isMobile) {
-      setList(nutrientLists.slice(0, 3));
+      setLists(nutrientLists.slice(0, 3));
     } else {
-      setList(nutrientLists);
+      setLists(nutrientLists);
     }
   }, [isMobile]);
 
@@ -23,7 +24,6 @@ const NutritionSection = () => {
     const titleSplit = SplitText.create(".nutrition-title", {
       type: "chars",
     });
-
     const paragraphSplit = SplitText.create(".nutrition-section p", {
       type: "words, lines",
       linesClass: "paragraph-line",
@@ -35,9 +35,8 @@ const NutritionSection = () => {
         start: "top center",
       },
     });
-
     contentTl
-      .from(titleSplit, {
+      .from(titleSplit.chars, {
         yPercent: 100,
         stagger: 0.02,
         ease: "power2.out",
@@ -49,16 +48,18 @@ const NutritionSection = () => {
         duration: 1,
         stagger: 0.01,
       });
+
     const titleTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".nutrition-section",
         start: "top 80%",
       },
     });
+
     titleTl.to(".nutrition-text-scroll", {
       duration: 1,
       opacity: 1,
-      clipPath: "polygon(100% 0,0 0, 0 100%,100% 100%)",
+      clipPath: "polygon(100% 0, 0 0, 0 100%, 100% 100%)",
       ease: "power1.inOut",
     });
   });
@@ -67,10 +68,12 @@ const NutritionSection = () => {
     <section className="nutrition-section">
       <img
         src="/images/slider-dip.png"
-        alt="slider"
+        alt=""
         className="w-full object-cover"
       />
-      <img src="/images/big-img.png" alt="big image" className="big-img" />
+
+      <img src="/images/big-img.png" alt="" className="big-img" />
+
       <div className="flex md:flex-row flex-col justify-between md:px-10 px-5 mt-14 md:mt-0">
         <div className="relative inline-block md:translate-y-20">
           <div className="general-title relative flex flex-col justify-center items-center gap-24">
@@ -78,10 +81,12 @@ const NutritionSection = () => {
               <h1 className="nutrition-title">It still does</h1>
             </div>
             <div
+              style={{
+                clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)",
+              }}
               className="nutrition-text-scroll place-self-start"
-              style={{ clipPath: "polygon(0% 0%,0% 0%,0% 100%,0% 100%)" }}
             >
-              <div className="bg-yellow-brown pb-5 md:pt-0 pt-3 md:px-5 px-3 inline-block ">
+              <div className="bg-yellow-brown pb-5 md:pt-0 pt-3 md:px-5 px-3">
                 <h2 className="text-milk-yellow">Body Good</h2>
               </div>
             </div>
@@ -91,25 +96,26 @@ const NutritionSection = () => {
         <div className="flex md:justify-center items-center translate-y-5">
           <div className="md:max-w-xs max-w-md">
             <p className="text-lg md:text-right text-balance font-paragraph">
-              Milk contain a wide array of nutrients,including vitamins,minerals
-              and protein,and this is lactose free.
+              Milk contains a wide array of nutrients, including vitamins,
+              minerals, and protein, and this is lactose free
             </p>
           </div>
         </div>
+
         <div className="nutrition-box">
           <div className="list-wrapper">
-            {list.map((nutrient, index) => (
+            {lists.map((nutrient, index) => (
               <div key={index} className="relative flex-1 col-center">
-                <div className="">
+                <div>
                   <p className="md:text-lg font-paragraph">{nutrient.label}</p>
-                  <p className="font-paragraph text-sm mt-2">Up to</p>
-                  <p className="text-2xl md:text-4xl tracking-lighter font-bold">
+                  <p className="font-paragraph text-sm mt-2">up to</p>
+                  <p className="text-2xl md:text-4xl tracking-tighter font-bold">
                     {nutrient.amount}
                   </p>
                 </div>
 
-                {index !== list.length - 1 && (
-                  <div className="spacer-border"></div>
+                {index !== lists.length - 1 && (
+                  <div className="spacer-border" />
                 )}
               </div>
             ))}
