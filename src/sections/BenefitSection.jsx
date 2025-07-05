@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import ClipPathTitle from "../components/ClipPathTitle";
 import gsap from "gsap";
-import VideoPin from "../components/VideoPin";
+import VideoPinSection from "../components/VideoPinSection";
 
 const BenefitSection = () => {
   useGSAP(() => {
@@ -19,25 +19,25 @@ const BenefitSection = () => {
       .to(".benefit-section .first-title", {
         duration: 1,
         opacity: 1,
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        clipPath: "polygon(0% 0%, 100% 0, 100% 100%, 0% 100%)",
         ease: "circ.out",
       })
       .to(".benefit-section .second-title", {
         duration: 1,
         opacity: 1,
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        clipPath: "polygon(0% 0%, 100% 0, 100% 100%, 0% 100%)",
         ease: "circ.out",
       })
       .to(".benefit-section .third-title", {
         duration: 1,
         opacity: 1,
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        clipPath: "polygon(0% 0%, 100% 0, 100% 100%, 0% 100%)",
         ease: "circ.out",
       })
       .to(".benefit-section .fourth-title", {
         duration: 1,
         opacity: 1,
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        clipPath: "polygon(0% 0%, 100% 0, 100% 100%, 0% 100%)",
         ease: "circ.out",
       });
   });
@@ -46,11 +46,12 @@ const BenefitSection = () => {
     <section className="benefit-section">
       <div className="container mx-auto pt-20">
         <div className="col-center">
-          <p className="">
-            Unlock the Advantages: <br /> Explore the Key Benefits of Choosing
-            SPYLT
+          <p>
+            Unlock the Advantages: <br />
+            Explore the Key Benefits of Choosing SPYLT
           </p>
-          <div className="mt-20 col-center ">
+
+          <div className="mt-20 col-center">
             <ClipPathTitle
               title={"Shelf stable"}
               color={"#faeade"}
@@ -80,13 +81,15 @@ const BenefitSection = () => {
               borderColor={"#222123"}
             />
           </div>
+
           <div className="md:mt-0 mt-10">
             <p>And much more ...</p>
           </div>
         </div>
       </div>
+
       <div className="relative overlay-box">
-        <VideoPin/>
+        <VideoPinSection />
       </div>
     </section>
   );
